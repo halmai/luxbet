@@ -49,9 +49,9 @@ SELECT customer.*, occupation_name
 		 */
 		function fetchCustomers( $dbh, $sql ) {
 			if ( isset( $_GET[ "occupation_name" ] ) ) {
-				$pattern = "/^[a-zA-Z0-9]+$/";
+				$pattern = "/^[a-zA-Z0-9]{1,100}$/";
 				if ( !preg_match( $pattern, $_GET[ "occupation_name" ] ) ) {
-					throw new \Exception( "The occupation_name parameter must contain one or more alphanumerical characters." );
+					throw new \Exception( "The occupation_name parameter must contain 1...100 alphanumerical characters." );
 				}
 				$sql .= "WHERE occupation_name = ?";
 				$params = array( $_GET[ "occupation_name" ] );
